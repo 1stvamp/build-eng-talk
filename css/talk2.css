@@ -19,6 +19,10 @@ span, pre, h2, h3, p, ul {
     font-size: 80%;
 }
 
+pre {
+    font-size: 100% !important;
+}
+
 ul {
     width: 50%;
     padding-left: 1em;
@@ -34,7 +38,6 @@ ul {
 section {
     background-repeat: no-repeat;
     background-position: left 0;
-    margin-top: 10%;
     width: 100%;
 }
 
@@ -43,8 +46,8 @@ section {
 }
 
 .slide-1 {
-    background-image: url('../images/westalkbraveworld.png');
-    background-position: 0 -1em;
+    background-image: url('../images/westalklessonslearned.png');
+    background-position: 0 4em;
 }
 
 .slide-2 {
@@ -52,9 +55,29 @@ section {
     background-position: -3em 0;
 }
 
-.slide-7 {
+.slide-5 {
     background-image: url('../images/westalkwhatabout.png');
     background-position: 0 -1em;
+}
+
+.slide-18 {
+    background-image: url('../images/islands5.png');
+    background-position: 0 -1em;
+}
+
+.slide-19 {
+    background-image: url('../images/islands6.png');
+    background-position: 0 -1em;
+}
+
+.slide-20 {
+    background-image: url('../images/islands7.png');
+    background-position: 0 -1em;
+}
+
+.slide-21 {
+    background-image: url('../images/westalkbraveworld.png');
+    background-position: 0 0em;
 }
 
 .exit1 {

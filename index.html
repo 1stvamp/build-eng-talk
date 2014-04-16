@@ -4,11 +4,11 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title>Build pipelines, Python and You</title>
+		<title>Where Goombas Dare</title>
 
 		<base href="reveal.js/">
 
-		<meta name="description" content="A talk for Python Sheffield">
+		<meta name="description" content="A talk for leedsDevops">
 		<meta name="author" content="Wes Mason">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,8 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-				## Build pipelines, Python and You
+				## Where Goombas Dare
+				### Build pipelines, Release Engineering, and You
 
 				Wes Mason  
 				
@@ -43,43 +44,129 @@
 				<section>
 				## Who?
 				- 	 @1stvamp (twitter/github)
-				- 	 Engineer at ServerDensity
 				- 	 I release lots of open source code
 				</section>
 
 				<section>
 					###&quot;a sub-discipline in software engineering concerned with the compilation, assembly, and delivery of source code into finished products or other software components.&quot;
 				</section>
-				<section>
-				<section>
-				## But builds are for Games and kernels
-				</section>
-				<section>
-				## Yeah?
 
-				```
-				./env/bin/activate
-				pip install -r requirements.txt
-				```
+				<section>
+				<section>
+				## Okay, so what's a build pipeline?
 				</section>
 				<section>
-				## Well...
+				{Code change} / {Release}
+
+				↓
+
+				Build steps
+
+				↓
+
+				Package
+
 				</section>
 				<section>
-				<img src="../images/error.png" width="600"/>
+				↓
+
+				Asset
+
+				↓
+
+				Store
+
+				↓
+
+				Deploy?
 				</section>
 				</section>
 				<section>
-				## Continuous integration makes my builds reliable
+				## "Configuration Management"
+				### (Agility)
+				- 	 Version control
+				- 	 Branching models
+				- 	 Mainline merging (the almighty Pull Request)
+				</section>
+				<section>
+				<section>
+				## Releases
+				### (Identifiability)
+				- 	 Versioning, tagging, commits etc.
+				- 	 **v1.0.0 out today!**
+				- 	 Dependencies
+				</section>
+				<section>
+				## I don't need versions, I have revisions
+				- 	 Build once with rev 42
+				- 	 Build again with rev 42
+				- 	 Was it the same? *Maybe*.
+				</section>
+				<section>
+				## Don't trust state
+				- 	 Environments change, so builds can change too
+				- 	 Build artefacts are **thing**
+				- 	 "Version" your build
+				</section>
+				<section>
+				## but I just get the latest deps, k?
+				### (Reproducibility)
+				- 	 ...
+				- 	 No, really?
+				- 	 Pinning is essential, in any environment (sorry Go!)
+				</section>
+				<section>
+				## Configuration management is about managing change
+				### (Consistency)
+				- 	 Tracking revisions in an SCM/VCS is great..
+				- 	 .. but what about *managing* those changes?
+				</section>
+				</section>
+
+				<section>
+				<section>
+				## Builds
+				- 	 Builds don't *need* to be automated, they need to be documented.
+				- 	 ..but you may as well make automation your docs.
+				</section>
+				<section>
+				## Continuous integration
+				- 	 Goes hand in hand with a build pipeline, but can be mutually exclusive
+				- 	 Why not?
+
 				<img src="../images/travis.png"/> <img src="../images/jenkins.png"/>
 				</section>
 				<section>
-				## My configuration management system deploys everything 
-				<img src="../images/salt.png"/ width="250"/> <img src="../images/puppet.png" width="200"/> <img src="../images/chef.png"/>
+				## Build artefacts
+				- 	 Golden image
+				- 	 Rusty/silver/bronze/base etc. image
+				- 	 Packages
 				</section>
 				<section>
-				## Versions are irrelevant because I deploy continuously 
+				## Golden images
+				- 	 VM images
+				- 	 LXCs / Docker
+				- 	  ~ Base images ~
 				</section>
+				<section>
+				## Packages
+				- 	 Lightweight app/process images (Docker)
+				- 	 OS level packages (deb's, rpm's)
+				- 	 Application packages
+				</section>
+				<section>
+				## Release management..
+				### ..or how I learned to stop worrying and love the pipeline.
+				#### Change → Build → Test → Release
+				</section>
+				<section>
+				## But what about continuous delivery?
+				- 	 If you automate, and have faith in your "process", why not?
+				- 	 Or do you mean *continuous deployment*?
+				</section>
+				</section>
+
+				<section>
 				<section>
 				## Our devs know how it's built
 				<img src="../images/monkeydev.jpg"/>
@@ -93,9 +180,6 @@
 				<img src="../images/monkeyqa.jpg"/>
 				</section>
 				<section>
-				## ...and do any of them know *why*? 
-				</section>
-				<section>
 				## My build broke, but why? 
 				<img src="../images/cry.jpg" width="400"/>
 				</section>
@@ -103,146 +187,15 @@
 				## Document, document, document 
 				<img src="../images/document.jpg"/>
 				</section>
-
 				<section>
-				<section>
-				## Okay, so what's a build pipeline?
-				</section>
-				<section>
-				{Code change} / {Release}
-
-				→
-
-				Build steps
-
-				→
-
-				Package
-
-				</section>
-				<section>
-				→
-
-				Asset
-
-				→
-
-				Store
-
-				→
-
-				Deploy?
-				</section>
-				<section>
-				### Build steps
-				- Build server
-				- Continuous integration
-				- Buildbot, Jenkins, Travis
-				</section>
-				<section>
-				### Buildbot
-				- Built by the Twisted guys
-				- Continuous builds
-				- Polling / events (e.g. svn-hooks, git-hooks, Github webhooks etc.)
-				- Slaves can be VMs, actual machines, local, LXCs etc.
-				- Configured via Python
-				</section>
-				<section>
-				### Travis CI
-				- Free for open source (paid version too)
-				- Configured via `.travis.yml`
-				- travis-solo
-				- buildbot-travis
-				</section>
-				<section>
-				### Jenkins
-				- Arse to setup (but so can buildbot)
-				- ShiningPanda plugin - Python builds win
-				</section>
-				<section>
-				### Automating your build
-				- `make install`
-				- No really..
-				</section>
-				<section>
-				### Buildout
-				- Created by the zope/plone guys
-				- Configured via INI files
-				- Extended via Python
-				- 1.x includes virtualenv like abilities
-				</section>
-				<section>
-				### Buildout cont.
-				- Can create self contained "packages"
-				- Install from pretty much anywhere with recipes like `buildouthttp`
-				- Non-python package builds
-				- Wrap pretty much anything
-				- `dumppickedversions`
-				</section>
-				<section>
-				### fabric
-				- Automation and deployment tool
-				- Used for deploying things via SSH
-				- Can be used for builds steps
-				- `fabtools` makes this easier
-				</section>
-				<section>
-				```
-				from fabric.api import *
-				from fabtools import require
-				import fabtools
-
-				@task
-				def setup():
-
-				    # Require some Debian/Ubuntu packages
-				    require.deb.packages([
-				        'imagemagick',
-				        'libxml2-dev',
-				        ])
-
-				    # Require a Python package
-				    with fabtools.python.virtualenv('/home/myuser/env'):
-				        require.python.package('pyramid')
-				```
-				</section>
-				<section>
-				### Virtualenvs
-				- pip is not a build tool
-				- (...but it can be, via `build` hooks in setuptools, distutils et al)
-				- `pip --list --outdated`
-				- ..also see `yolk`
-				</section>
-				<section>
-				### ..wrapping everything up..
-				- `tox` - multiple builds again different envs
-				- `dh-virtualenv`
-				- `virtualenvwrapper`
-				- `pythonbrew`
-				- `pyenv`
-				</section>
-				<section>
-				### Rockstack
-				```
-				rock build
-				rock test
-				rock run
-				```
-				</section>
-				<section>
-				### "Golden image" vs "golden package" vs "just rerun all the things"
-				- Build whole VM images
-				- ..or LXCs (`docker`)
-				- Build OS packages (`dh-virtualenv`)
-				- Build eggs, wheels, tar's
-				- ..or just let your CM handle it
+				<img src="../images/happydance.gif" width="400"/>
 				</section>
 				</section>
 
 				<section>
 				<section class="exit1">
 				## sys.exit(0)
-				- 	 Slides: [github.com/1stvamp/pysheff-build-talk](https://github.com/1stvamp/pysheff-build-talk)
+				- 	 Slides: [github.com/1stvamp/build-eng-talk](https://github.com/1stvamp/build-eng-talk)
 				</section>
 				<section class="exit2">
 				## ^D
